@@ -23,7 +23,8 @@
                     "name": "IMAGE_HOUR_2",
                     "targetPlatforms": null,
                     "type": "bitmap"
-                },                {
+                },
+                {
                     "file": "images/img/hour-3.png",
                     "name": "IMAGE_HOUR_3",
                     "targetPlatforms": null,
@@ -94,5 +95,5 @@
             "watchface": true
         }
     },
-    "version": "0.2.0"
+    "version": "0.2.1"
 }
