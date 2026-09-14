@@ -64,4 +64,3 @@ drawHours(new Date().getHours(), render);
 render.end();
 
 watch.addEventListener("minutechange", draw);
-
