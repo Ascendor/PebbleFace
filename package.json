@@ -1,0 +1,99 @@
+{
+    "author": "Ascendor",
+    "dependencies": {},
+    "keywords": [
+        "pebble-app"
+    ],
+    "name": "3dfx",
+    "pebble": {
+        "displayName": "Tribute to 3dfx",
+        "enableMultiJS": true,
+        "messageKeys": [],
+        "projectType": "moddable",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/img/hour-1.png",
+                    "name": "IMAGE_HOUR_1",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-2.png",
+                    "name": "IMAGE_HOUR_2",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-4.png",
+                    "name": "IMAGE_HOUR_4",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-3.png",
+                    "name": "IMAGE_HOUR_3",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-5.png",
+                    "name": "IMAGE_HOUR_5",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-6.png",
+                    "name": "IMAGE_HOUR_6",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-7.png",
+                    "name": "IMAGE_HOUR_7",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-8.png",
+                    "name": "IMAGE_HOUR_8",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-9.png",
+                    "name": "IMAGE_HOUR_9",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-10.png",
+                    "name": "IMAGE_HOUR_10",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-11.png",
+                    "name": "IMAGE_HOUR_11",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/img/hour-12.png",
+                    "name": "IMAGE_HOUR_12",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "emery"
+        ],
+        "uuid": "d5f4c149-c222-4e9f-a9e4-09777b7c263b",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "0.1.0"
+}
