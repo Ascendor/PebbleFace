@@ -25,14 +25,14 @@
                     "type": "bitmap"
                 },
                 {
-                    "file": "images/img/hour-4.png",
-                    "name": "IMAGE_HOUR_4",
+                    "file": "images/img/hour-3.png",
+                    "name": "IMAGE_HOUR_3",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
-                    "file": "images/img/hour-3.png",
-                    "name": "IMAGE_HOUR_3",
+                    "file": "images/img/hour-4.png",
+                    "name": "IMAGE_HOUR_4",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
