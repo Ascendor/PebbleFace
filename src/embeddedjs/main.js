@@ -2,17 +2,19 @@ import Poco from "commodetto/Poco";
 
 const render = new Poco(screen);
 
+// Colors
 const black = render.makeColor(0, 0, 0);
 const white = render.makeColor(255, 255, 255);
 const orange = render.makeColor(231, 95, 47);
-const gray = render.makeColor(127, 127, 127);
 
+//Fonts
 const timeFont = new render.Font("Gothic-Bold", 18);
 
+//Images
 const hand = new Poco.PebbleDrawCommandImage(1);
 const background = new Poco.PebbleBitmap(2);
 
-const lengthCorrection = 0.88;
+//Values
 const hourRotations = [
     -86.3,  // 12
     138.1,  // 1
@@ -44,22 +46,24 @@ const hourScales = [
     0.880   // 11
 ];
 
+/**
+* returns scale and rotation values for rendering the watchface's hand
+* based on hourRotations and hourScales
+*/
 function getClockValues(event) {
     const now = event.date;
 
-    // 0 = 12 Uhr, 1 = 1 Uhr, ... 11 = 11 Uhr
+    // 0 = 12 o'clock, 1 = 1 o'clock, ... 11 = 11 o'clock
     const hour = now.getHours() % 12;
 
-    // Anteil der aktuellen Stunde
+    // Calculate rotation
     const fraction = now.getMinutes() / 60;
-
     const nextHour = (hour + 1) % 12;
 
-    // Rotation interpolieren
     let currentRotation = hourRotations[hour];
     let nextRotation = hourRotations[nextHour];
 
-    // Übergang 12 -> 1
+    // Transition from 12 to 1
     if (hour === 11) {
         nextRotation -= 360;
     }
@@ -68,7 +72,7 @@ function getClockValues(event) {
         currentRotation +
         (nextRotation - currentRotation) * fraction;
 
-    // Länge interpolieren
+    // Calculate scale
     const currentScale = hourScales[hour];
     const nextScale = hourScales[nextHour];
 
@@ -82,6 +86,10 @@ function getClockValues(event) {
     };
 }
 
+
+/**
+* main method, drawing background, hand and minutes
+*/
 function draw(event) {
     const now = event.date;
     const minutes = String(now.getMinutes()).padStart(2, "0");
@@ -102,21 +110,21 @@ function draw(event) {
 
     render.begin();
 
-    // Hintergrund
+    //Background
     render.drawBitmap(
         background,
         (render.width - background.width) / 2,
         (render.height - background.height) / 2
     );
   
-    // Zeiger
+    // Hand
     render.drawDCI(
         rotated,
         118 - 80 * scale,
         101 - 80 * scale
     );
 
-    // Mittelpunkt
+    // Center of hand
     render.drawCircle(
         white,
         118,
@@ -137,4 +145,5 @@ function draw(event) {
     render.end();
 }
 
+// Cycle per minute
 watch.addEventListener("minutechange", draw);
