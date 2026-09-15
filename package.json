@@ -13,78 +13,6 @@
         "resources": {
             "media": [
                 {
-                    "file": "images/img/hour-1.png",
-                    "name": "IMAGE_HOUR_1",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-2.png",
-                    "name": "IMAGE_HOUR_2",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-3.png",
-                    "name": "IMAGE_HOUR_3",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-4.png",
-                    "name": "IMAGE_HOUR_4",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-5.png",
-                    "name": "IMAGE_HOUR_5",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-6.png",
-                    "name": "IMAGE_HOUR_6",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-7.png",
-                    "name": "IMAGE_HOUR_7",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-8.png",
-                    "name": "IMAGE_HOUR_8",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-9.png",
-                    "name": "IMAGE_HOUR_9",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-10.png",
-                    "name": "IMAGE_HOUR_10",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-11.png",
-                    "name": "IMAGE_HOUR_11",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/img/hour-12.png",
-                    "name": "IMAGE_HOUR_12",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
                     "file": "data/hour_hand_160x160_orange.pdc",
                     "name": "HOUR_HAND_ORANGE",
                     "targetPlatforms": null,
@@ -107,5 +35,5 @@
             "watchface": true
         }
     },
-    "version": "0.2.1"
+    "version": "0.5.0"
 }

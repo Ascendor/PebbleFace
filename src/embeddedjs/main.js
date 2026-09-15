@@ -9,8 +9,8 @@ const gray = render.makeColor(127, 127, 127);
 
 const timeFont = new render.Font("Gothic-Bold", 18);
 
-const hand = new Poco.PebbleDrawCommandImage(13);
-const background = new Poco.PebbleBitmap(14);
+const hand = new Poco.PebbleDrawCommandImage(1);
+const background = new Poco.PebbleBitmap(2);
 
 const lengthCorrection = 0.88;
 const hourRotations = [
@@ -49,7 +49,6 @@ function getClockValues(event) {
 
     // 0 = 12 Uhr, 1 = 1 Uhr, ... 11 = 11 Uhr
     const hour = now.getHours() % 12;
-  console.log ("Hour: " + hour);
 
     // Anteil der aktuellen Stunde
     const fraction = now.getMinutes() / 60;
