@@ -1,66 +1,141 @@
 import Poco from "commodetto/Poco";
-console.log("Hello, 3dfx.");
+
 const render = new Poco(screen);
+
 const black = render.makeColor(0, 0, 0);
 const white = render.makeColor(255, 255, 255);
 const orange = render.makeColor(231, 95, 47);
 const gray = render.makeColor(127, 127, 127);
-//const timeFont = new render.Font("Bitham-Black", 30);
-//const timeFont = new render.Font("Roboto-Condensed", 21);
+
 const timeFont = new render.Font("Gothic-Bold", 18);
-//const timeFont = new render.Font("Gothic-Regular", 18);
 
-function draw(event) {  
-  const now = event.date;
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  if (minutes == "00") {
-    render.begin(36,26, 152+1, 143+1); // Wir aktualisieren nur Zeiger und Ziffern
-    const hours = now.getHours();
-    console.log(hours);
-	  drawHours(hours, render);
-  } else {
-    render.begin(168-1, 154-1, 15+2, 16+2);  // Wir aktualisieren nur Ziffern
-  }  
-  render.fillRectangle(white, 168, 154, 15, 12);	    
-  /*
-  drawTextWithOutline(render, minutes, timeFont, orange, gray,
-        170-1,
-        160-6);
-  */
-  render.drawText(minutes, timeFont, orange, 168, 150);
-  render.end();  
+const hand = new Poco.PebbleDrawCommandImage(13);
+const background = new Poco.PebbleBitmap(14);
+
+const lengthCorrection = 0.88;
+const hourRotations = [
+    -86.3,  // 12
+    138.1,  // 1
+    122.0,  // 2
+    101.2,  // 3
+     81.4,  // 4
+     62.4,  // 5
+     43.9,  // 6
+     25.7,  // 7
+      8.3,  // 8
+    -12.9,  // 9
+    -33.3,  // 10
+    -59.5   // 11
+];
+
+
+const hourScales = [
+    1.030,  // 12
+    1.628,  // 1
+    1.390,  // 2
+    1.346,  // 3
+    1.311,  // 4
+    1.364,  // 5
+    1.426,  // 6
+    1.346,  // 7
+    1.091,  // 8
+    0.924,  // 9
+    0.827,  // 10
+    0.880   // 11
+];
+
+function getClockValues(event) {
+    const now = event.date;
+
+    // 0 = 12 Uhr, 1 = 1 Uhr, ... 11 = 11 Uhr
+    const hour = now.getHours() % 12;
+  console.log ("Hour: " + hour);
+
+    // Anteil der aktuellen Stunde
+    const fraction = now.getMinutes() / 60;
+
+    const nextHour = (hour + 1) % 12;
+
+    // Rotation interpolieren
+    let currentRotation = hourRotations[hour];
+    let nextRotation = hourRotations[nextHour];
+
+    // Übergang 12 -> 1
+    if (hour === 11) {
+        nextRotation -= 360;
+    }
+
+    const rotation =
+        currentRotation +
+        (nextRotation - currentRotation) * fraction;
+
+    // Länge interpolieren
+    const currentScale = hourScales[hour];
+    const nextScale = hourScales[nextHour];
+
+    const scale =
+        currentScale +
+        (nextScale - currentScale) * fraction;
+
+    return {
+        rotation,
+        scale
+    };
 }
 
-function drawHours(hours, render) {
-  hours = hours % 12;
-  if (hours == 0) {
-    hours = 12;
-  }
-  const bitmap = new Poco.PebbleBitmap(hours);
-  render.fillRectangle(black, 0, 0, render.width, render.height);	
-	render.drawBitmap(bitmap, (render.width - bitmap.width) / 2, (render.height - bitmap.height) / 2);
+function draw(event) {
+    const now = event.date;
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const clock = getClockValues(event);
+
+    const rotationRadians =
+        clock.rotation * Math.PI / 180;
+
+    const scale = clock.scale;
+
+    const scaled = hand.clone().scale(scale);
+
+    const rotated = scaled.rotate(
+        rotationRadians,
+        80 * scale,
+        80 * scale
+    );
+
+    render.begin();
+
+    // Hintergrund
+    render.drawBitmap(
+        background,
+        (render.width - background.width) / 2,
+        (render.height - background.height) / 2
+    );
+  
+    // Zeiger
+    render.drawDCI(
+        rotated,
+        118 - 80 * scale,
+        101 - 80 * scale
+    );
+
+    // Mittelpunkt
+    render.drawCircle(
+        white,
+        118,
+        101,
+        7 * scale
+    );
+
+    render.drawCircle(
+        black,
+        118,
+        101,
+        5 * scale
+    );
+    
+    //Minutes    
+    render.drawText(minutes, timeFont, orange, 168, 150);
+  
+    render.end();
 }
-
-function drawTextWithOutline(render, text, font, fillColor, outlineColor, x, y) {
-    // 1. Draw the outline by offsetting the text 1 pixel in all 4 cardinal directions
-    render.drawText(text, font, outlineColor, x - 1, y);     // Left
-    render.drawText(text, font, outlineColor, x + 1, y);     // Right
-    render.drawText(text, font, outlineColor, x,     y - 1); // Up
-    render.drawText(text, font, outlineColor, x,     y + 1); // Down
-
-    // Optional: Add diagonal offsets for a thicker/smoother outline
-    // render.drawText(text, font, outlineColor, x - 1, y - 1);
-    // render.drawText(text, font, outlineColor, x + 1, y - 1);
-    // render.drawText(text, font, outlineColor, x - 1, y + 1);
-    // render.drawText(text, font, outlineColor, x + 1, y + 1);
-
-    // 2. Draw the main text on top in the center
-    render.drawText(text, font, fillColor, x, y);
-}
-
-//initial background render
-render.begin();
-drawHours(new Date().getHours(), render);
-render.end();
 
 watch.addEventListener("minutechange", draw);

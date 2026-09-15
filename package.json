@@ -83,6 +83,18 @@
                     "name": "IMAGE_HOUR_12",
                     "targetPlatforms": null,
                     "type": "bitmap"
+                },
+                {
+                    "file": "data/hour_hand_160x160_orange.pdc",
+                    "name": "HOUR_HAND_ORANGE",
+                    "targetPlatforms": null,
+                    "type": "raw"
+                },
+                {
+                    "file": "images/background.png",
+                    "name": "IMAGE_BACKGROUND",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
                 }
             ]
         },
