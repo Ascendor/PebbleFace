@@ -16,7 +16,6 @@ const background = new Poco.PebbleBitmap(2);
 
 //Values
 const hourRotations = [
-    -86.3,  // 12
     138.1,  // 1
     122.0,  // 2
     101.2,  // 3
@@ -27,12 +26,12 @@ const hourRotations = [
       8.3,  // 8
     -12.9,  // 9
     -33.3,  // 10
-    -59.5   // 11
+    -59.5,  // 11
+    -86.3   // 12
 ];
 
 
 const hourScales = [
-    1.030,  // 12
     1.628,  // 1
     1.390,  // 2
     1.346,  // 3
@@ -43,7 +42,8 @@ const hourScales = [
     1.091,  // 8
     0.924,  // 9
     0.827,  // 10
-    0.880   // 11
+    0.880,  // 11
+    1.030   // 12
 ];
 
 /**
@@ -53,18 +53,17 @@ const hourScales = [
 function getClockValues(event) {
     const now = event.date;
 
-    // 0 = 12 o'clock, 1 = 1 o'clock, ... 11 = 11 o'clock
-    const hour = now.getHours() % 12;
+    const hourIndex = (now.getHours() + 11) % 12;
+    const nextIndex = (hourIndex + 1) % 12;
 
-    // Calculate rotation
     const fraction = now.getMinutes() / 60;
-    const nextHour = (hour + 1) % 12;
 
-    let currentRotation = hourRotations[hour];
-    let nextRotation = hourRotations[nextHour];
+    // Rotation
+    let currentRotation = hourRotations[hourIndex];
+    let nextRotation = hourRotations[nextIndex];
 
-    // Transition from 12 to 1
-    if (hour === 11) {
+    // 12 -> 1
+    if (hourIndex === 11) {
         nextRotation -= 360;
     }
 
@@ -72,9 +71,9 @@ function getClockValues(event) {
         currentRotation +
         (nextRotation - currentRotation) * fraction;
 
-    // Calculate scale
-    const currentScale = hourScales[hour];
-    const nextScale = hourScales[nextHour];
+    // Skalierung
+    const currentScale = hourScales[hourIndex];
+    const nextScale = hourScales[nextIndex];
 
     const scale =
         currentScale +
