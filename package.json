@@ -23,6 +23,13 @@
                     "name": "IMAGE_BACKGROUND",
                     "targetPlatforms": null,
                     "type": "bitmap"
+                },
+                {
+                    "file": "images/menu-icon.png",
+                    "menuIcon": true,
+                    "name": "IMAGE_MENU_ICON",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
                 }
             ]
         },
@@ -35,5 +42,5 @@
             "watchface": true
         }
     },
-    "version": "0.5.0"
+    "version": "0.5.2"
 }
